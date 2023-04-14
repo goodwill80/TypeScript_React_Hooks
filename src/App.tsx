@@ -1,24 +1,61 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import UseStateComponent from './Components/UseStateComponent';
+import UseEffectComponent from './Components/UseEffectComponent';
+import { useGlobalUserContext } from './Components/UseContextComponent';
+import { useGlobalCounterContext } from './Components/UseReducerWithContextComp';
+
 import './App.css';
 
 function App() {
+  const contextFromUser = useGlobalUserContext();
+  const contextFromCounter = useGlobalCounterContext();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-3xl font-bold">Reducer with Context</h1>
+        <h1 className="text-4xl font-bold bg-black p-4 text-white">
+          {contextFromCounter?.count.count}
+        </h1>
+        <div className="flex p-2 space-x-2">
+          <button
+            onClick={() => contextFromCounter?.decrement()}
+            className="btn btn-sm bg-blue-500 w-[80px] rounded-md text-white"
+          >
+            - Minus
+          </button>
+          <button
+            onClick={() => contextFromCounter?.increment()}
+            className="btn btn-sm bg-blue-500 w-[80px] rounded-md text-white"
+          >
+            + Add
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h1 className="text-2xl mb-3 font-bold">UseContext</h1>
+        <h3>Firstname: {contextFromUser!.user?.first}</h3>
+        <h3>Lastname: {contextFromUser!.user.last}</h3>
+        <button
+          className="btn bg-teal-700 text-white p-2 rounded-lg"
+          onClick={() =>
+            contextFromUser?.setUser({ first: 'Oliver', last: 'Ming' })
+          }
         >
-          Learn React
-        </a>
-      </header>
+          Set User
+        </button>
+      </div>
+
+      <div>
+        <h1 className="text-2xl mb-3 font-bold">UseEffect</h1>
+        <UseEffectComponent />
+      </div>
+      <div>
+        <h1 className="text-2xl mb-3 font-bold">UseState</h1>
+        <UseStateComponent />
+      </div>
     </div>
   );
 }
