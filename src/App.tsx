@@ -1,6 +1,7 @@
 import UseStateComponent from './Components/UseStateComponent';
 import UseEffectComponent from './Components/UseEffectComponent';
 import UseRefComponent from './Components/UseRefComponent';
+import CustomHookComponent from './Components/CustomHookComponent';
 
 import { useGlobalUserContext } from './Components/UseContextComponent';
 import { useGlobalCounterContext } from './Components/UseReducerWithContextComp';
@@ -12,13 +13,17 @@ function App() {
   const contextFromCounter = useGlobalCounterContext();
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-auto">
+      {/* CUSTOM HOOK COMPONENT */}
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-3xl font-bold">CustomHook Component</h1>
+        <CustomHookComponent />
+      </div>
       {/* USEREF */}
       <div>
         <h1 className="text-3xl font-bold">UseRef Component</h1>
         <UseRefComponent />
       </div>
-
       {/* COUNTER REDUCER AND CONTEXT */}
       <div className="flex flex-col justify-center items-center space-y-2">
         <h1 className="text-3xl font-bold">Reducer with Context</h1>
