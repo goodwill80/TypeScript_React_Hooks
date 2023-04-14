@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export interface Beverage {
   name: string;
@@ -13,8 +13,8 @@ export interface Beverage {
   level: number;
 }
 
-// CUSTOM HOOK FUNCTIONinterface RootObject
-// Note we also converted the Beverage type to generic <T>
+// CUSTOM HOOK as a Generic FUNCTION
+// Note we also converted the Beverage type in data to generic <T>
 function useFetchData<T>(url: string): {
   data: T | null;
   done: boolean;
@@ -40,7 +40,20 @@ function useFetchData<T>(url: string): {
 // We passed the <T> generic into the function as <Beverage[]>
 function CustomHookComponent() {
   const { data, done } = useFetchData<Beverage[]>('/hv-taplist.json');
-  return <div>{done && <img src={data![0].logo} alt="Beverage Logo" />}</div>;
+  // Using useMemo to get a single item
+  const portLandTaps = useMemo(
+    () =>
+      (data || []).filter((bev) => bev.producerLocation.includes('Portland')),
+    []
+  );
+
+  return (
+    <div>
+      {portLandTaps.length && (
+        <img src={portLandTaps![1].logo} alt="Beverage Logo" />
+      )}
+    </div>
+  );
 }
 
 export default CustomHookComponent;
