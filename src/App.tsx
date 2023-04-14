@@ -13,11 +13,18 @@ function App() {
 
   return (
     <div className="App">
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center space-y-2">
         <h1 className="text-3xl font-bold">Reducer with Context</h1>
         <h1 className="text-4xl font-bold bg-black p-4 text-white">
-          {contextFromCounter?.count.count}
+          {contextFromCounter?.count}
         </h1>
+        <h1 className="h-[20px]">{contextFromCounter?.text}</h1>
+        <input
+          className="border border-gray-200 p-2 rounded-lg"
+          onChange={contextFromCounter?.handleText}
+          type="text"
+          placeholder="Enter text..."
+        />
         <div className="flex p-2 space-x-2">
           <button
             onClick={() => contextFromCounter?.decrement()}

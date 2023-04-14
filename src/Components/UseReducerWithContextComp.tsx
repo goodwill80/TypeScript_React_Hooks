@@ -9,7 +9,8 @@ import {
 
 // Schema of context
 interface CounterContextType {
-  count: typeof initState;
+  count: number;
+  text: string;
   dispatch: React.Dispatch<ReducerActionType>;
   increment: () => void;
   decrement: () => void;
@@ -39,7 +40,8 @@ function UseReducerWithContextComp({ children }: ContextChildrenType) {
   };
 
   const ctx = {
-    count: state,
+    count: state.count,
+    text: state.text,
     dispatch,
     increment,
     decrement,
