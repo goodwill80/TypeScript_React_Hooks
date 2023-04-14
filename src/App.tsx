@@ -1,7 +1,7 @@
-import React from 'react';
-
 import UseStateComponent from './Components/UseStateComponent';
 import UseEffectComponent from './Components/UseEffectComponent';
+import UseRefComponent from './Components/UseRefComponent';
+
 import { useGlobalUserContext } from './Components/UseContextComponent';
 import { useGlobalCounterContext } from './Components/UseReducerWithContextComp';
 
@@ -12,7 +12,14 @@ function App() {
   const contextFromCounter = useGlobalCounterContext();
 
   return (
-    <div className="App">
+    <div className="flex flex-col justify-center items-center h-screen">
+      {/* USEREF */}
+      <div>
+        <h1 className="text-3xl font-bold">UseRef Component</h1>
+        <UseRefComponent />
+      </div>
+
+      {/* COUNTER REDUCER AND CONTEXT */}
       <div className="flex flex-col justify-center items-center space-y-2">
         <h1 className="text-3xl font-bold">Reducer with Context</h1>
         <h1 className="text-4xl font-bold bg-black p-4 text-white">
@@ -40,7 +47,7 @@ function App() {
           </button>
         </div>
       </div>
-
+      {/* CONTEXT */}
       <div>
         <h1 className="text-2xl mb-3 font-bold">UseContext</h1>
         <h3>Firstname: {contextFromUser!.user?.first}</h3>
@@ -54,7 +61,7 @@ function App() {
           Set User
         </button>
       </div>
-
+      {/* USEEFFECT */}
       <div>
         <h1 className="text-2xl mb-3 font-bold">UseEffect</h1>
         <UseEffectComponent />
